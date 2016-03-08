@@ -14,6 +14,7 @@ limitations under the License.
 package de.kie.server.thrift.client.demo
 
 import org.kie.server.thrift.client.facts.*;
+import org.kie.server.thrift.converters.*;
 import java.util.Date;
 import java.math.BigDecimal;
 
@@ -38,7 +39,7 @@ rule "GoodBye"
         Message( status == protocolConstants.GOODBYE, $string : messageString, $embedded : embeddedMessage )
     then
         System.out.println( $string );
-        System.out.println( $embedded.bigdecimal );
+        System.out.println( BigDecimalConverter.toJava($embedded.bigdecimal).doubleValue() );
 end
 
 rule "BigDecimal"
